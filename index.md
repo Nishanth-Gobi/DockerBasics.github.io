@@ -1,37 +1,160 @@
-## Welcome to GitHub Pages
+# Getting started on Docker
 
-You can use the [editor on GitHub](https://github.com/Nishanth-Gobi/DockerBasics.github.io/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+#### Nishanth Gobi
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## What is Docker?
+> An open source containerization technology for building and containerizing your applications.
 
-### Markdown
+## Why do we need docker?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Up until a few years back, software companies would often face the issue of **mismatches in dependencies/libraries** between the development team and testing team. And docker was developed to solve this problem while addressing the drawbacks of hypervisors. 
 
-```markdown
-Syntax highlighted code block
+**How do we solve this?**
 
-# Header 1
-## Header 2
-### Header 3
+1. JAR files 
+	-  **Java ARchive** is a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution. 
+	- Drawback: Extra dependencies that even the developer is not aware of!
+		
+2. Hypervisor 
 
-- Bulleted
-- List
+ 	- Hypervisors are basically VMs.
+	- With hypervisors, softwares can be developed on the guest OS (VM) and it can be shipped off as a whole image along with all the dependencies.
+	- *"Like instances of a class object"*
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+<center><table>
+<tr><td>Guest OS</td><td>Guest OS</td><td>Guest OS</td></tr>
+	<tr><td colspan="3"> Hypervisor </td></tr>
+<tr><td colspan="3"> <i>(Host OS)</i> </td></tr>
+	<tr><td colspan="3"> Hardware </td>	</tr>
+</table></center>
 
-[Link](url) and ![Image](src)
+**Drawbacks with hypervisors**
+- VMs are heavy! Hence, we cannot run many Guest OSs simultaneously.
+- OS licensinng
+
+3. Containers
+
+	- Loosely isolated environments
+	- Overcomes the disadvantages of Hypervisor
+	- Idea origin: *LXE* (Linux containers)
+	- Containers share the same os
+
+
+<center><table>
+<tr><td>App 1</td><td>App 2</td><td>App 3</td></tr>
+<tr><td colspan="3"> <i>Docker</i> </td></tr>
+<tr><td colspan="3"> <i>OS</i> </td></tr>
+	<tr><td colspan="3"> Hardware </td>	</tr>
+</table></center>
+
+
+**& that's why we need Docker!**
+
+Docker helps pack your apps along with it's dependencies into a single container and the image of the container can then be shared with others.
+
+
+## Installation
+
+[Try Docker before installing](http://labs.play-with-docker.com)
+
+[Ubuntu](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Ubuntu.md)
+
+[Windows](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Windows.md)
+
+
+## Basic Docker commands
+
+Check docker status:
+```shell
+sudo systemctl status docker
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+List all containers:
+```shell
+sudo docker ps -a
+```
+```shell
+sudo docker container ls -a
+```
 
-### Jekyll Themes
+List all docker image:
+```shell
+sudo docker image ls
+```
+```shell
+sudo docker images
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Nishanth-Gobi/DockerBasics.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Remove a docker container:
+```shell
+sudo docker rm <CONTAINER_ID>
+```
 
-### Support or Contact
+Remove a docker image:
+```shell
+sudo docker rmi <IMAGE_ID>
+```
+*If you want to remove an image you have to remove all the containers that use the image first!*
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Pull an image from Docker hub:
+```shell
+sudo docker pull <IMAGE_NAME>
+```
+
+ > What happens when you pull a docker image?
+> 1. Checks for the image in your local repo
+> 2. If not found, then checks for the image in docker hub and downloads it 
+> 3. Makes a container with the image
+
+## Sample 
+
+[Running Ubuntu on docker](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Running%20Ubuntu%20on%20docker.md)
+
+
+## Docker Engine
+
+**Docker engine** - The software that you have installed in your system
+
+ <img src="https://wiki.aquasec.com/download/attachments/2854889/Docker_Engine.png?version=1&modificationDate=1520172702424&api=v2">
+
+### Components
+
+1. Images 
+> Read-only binary templates used to create Docker containers.
+
+2. Container
+> A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
+
+3. Networking
+> Docker implements networking (between containers and host) in an application-driven manner. 
+>List of available drivers: 
+>- Bridge (default) 
+>- Host 
+>- None 
+>- Overlay (Swarm services) 
+>- Macvlan
+
+4. Data Volumes
+> Once you destroy a container all the data in it is lost.
+> We use data volumes to store data from docker containers. 
+
+
+### Docker Architecture
+
+- Docker uses a **client-server** architecture 
+- The __Docker client__ talks to the __Docker daemon__, which does the heavy lifting of building, running, and distributing your Docker containers. 
+- The Docker client and daemon communicate using a __REST API__
+- Thus the client and daemon can run on the same system, or you can connect the client to a remote Docker daemon. 
+
+<img src="https://docs.docker.com/engine/images/architecture.svg">
+
+
+## How to use docker?
+
+1. You can [Dockerise Apps](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Dockerise%20Apps.md) that have already been developed.
+2. You can [Create App in docker](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Create%20App%20in%20docker.md).
+
+
+## Got dockerised??
+Learn more at [Docker Docs](https://docs.docker.com/)
