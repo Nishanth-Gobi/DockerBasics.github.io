@@ -58,7 +58,7 @@ Docker helps pack your apps along with it's dependencies into a single container
 
 [Try Docker before installing](http://labs.play-with-docker.com)
 
-[Ubuntu](Ubuntu.md)
+[Ubuntu](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Ubuntu.md)
 
 [Windows](https://github.com/Nishanth-Gobi/DockerBasics.github.io/blob/main/Windows.md)
 
